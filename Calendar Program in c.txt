@@ -1,0 +1,238 @@
+#include<stdio.h>
+#include<conio.h>
+
+void startEndPos();
+void totalDays();
+void daysName();
+void monthName( int m);
+void printName();
+const int tempyear= 2012;
+int tempday,Nyear;
+int EP[13];
+int SP[13],mn=1;
+int days[13];
+int main()
+{
+    int tempdiff,tempdiv,tempmod,s,i,j,m1=0,m2=0,m3=0,cm=1,l,l2,l3,d1,d2,d3,k,l1,r;
+    printf("Enter the Year : ");
+    scanf("%d",&Nyear);
+    if(Nyear>tempyear)
+    {
+        tempdiff=Nyear-tempyear;
+        tempdiv=(tempdiff+3)/4;
+        tempdiff+=tempdiv;
+        tempday=tempdiff%7;
+
+    }
+    else if(Nyear==tempyear)
+    {
+       tempday=0;
+       }
+    else
+    {
+        tempdiff=tempyear-Nyear;
+        tempdiv=tempdiff/4;
+        tempdiff+=tempdiv;
+        tempday=7-tempdiff%7;
+
+    }
+    totalDays();
+    startEndPos();
+
+            printf("\t\t\t-------------------- CALENDAR FOR YEAR %d --------------------\n\n",Nyear);
+            //Printing dates
+
+        for(r=1;r<=4;r++)
+        {  // printf("\n");
+            m1=m3+1;
+            m2=m1+1;
+            m3=m1+2;
+            d1=d2=d3=1;
+            l1=l2=l3=1;
+            printName();
+
+            for(k=1;k<=6;k++)
+            {
+                for(l=1;l<=42;l++)
+                {
+                    if(l1<=SP[m1]||l1>EP[m1])
+                        printf("     ");
+                    else{
+                        printf("%-5d",d1);
+                        d1++;
+                    }
+                    l1++;
+                    if(l%7==0)
+                    {
+                        printf("\t");
+                        break;
+                    }
+
+                }
+                for(l=1;l<=7;l++)
+                {
+                    if(l2<=SP[m2]||l2>EP[m2])
+                        printf("     ");
+                    else{
+                        printf("%-5d",d2);
+                        d2++;
+                    }
+                    l2++;
+                    if(l%7==0)
+                    {
+                        printf("\t");
+                        break;
+                    }
+                }
+
+                for(l=1;l<=7;l++)
+                {
+                    if(l3<=SP[m3]||l3>EP[m3])
+                        printf("     ");
+                    else{
+                        printf("%-5d",d3);
+                        d3++;
+                    }
+                    l3++;
+                    if(l%7==0)
+                    {
+                        printf("\t");
+                        break;
+                    }
+                }
+                printf("\n");
+
+            }
+        }    
+
+        
+
+return 0;
+}
+
+//Function for store starting and end position of day
+void startEndPos()
+{
+    int s;
+    SP[0]=0;
+    SP[1]=tempday;
+    EP[0]=0;
+    EP[1]=42-(42-SP[1]-days[1]);
+
+
+    for(s=2;s<=12;s++)
+    {
+        SP[s]=7-(42-EP[s-1])%7;
+        EP[s]=42-(42-SP[s]-days[s]);
+    
+    }
+    
+
+}
+
+//estimate totaldays of each month
+void totalDays()
+{
+    int d;
+    days[0]=0;
+    for(d=1;d<=12;d++)
+    {
+        if(d<8)
+        {
+            if(d%2!=0)
+            days[d]=31;
+            else if(d==2)
+            {
+                if(Nyear%4==0)
+                days[d]=29;
+                else
+                days[d]=28;
+            }
+            else
+                days[d]=30;
+        }
+        else
+            {
+                if(d%2==0)
+                days[d]=31;
+                else
+                days[d]=30;
+            }
+        
+        
+    }
+}
+
+void daysName()
+{
+  printf("Sun  Mon  Tue  Wed  Thu  Fri  Sat\t");
+ 
+}
+
+void monthName(int m)
+{
+    switch(m)
+    {
+        case 1:
+            printf("\t\tJanuary\t\t");
+            break;
+        case 2:
+            printf("\t\t\tFebruary\t\t");
+            break;
+        case 3:
+            printf("\t\tMarch");
+            break;
+        case 4:
+            printf("\t\tApril\t\t");
+            break;
+        case 5:
+            printf("\t\t\tMay\t\t");
+            break;
+        case 6:
+            printf("\t\t\tJune\t");
+            break;
+        case 7:
+            printf("\t\tJuly\t\t");
+            break;
+        case 8:
+            printf("\t\t\tAugust\t\t");
+            break;
+        case 9:
+            printf("\t\t\tSeptember\t\t");
+            break;
+        case 10:
+            printf("\t\tOctober\t\t");
+            break;
+        case 11:
+            printf("\t\t\tNovember\t\t");
+            break;
+        case 12:
+            printf("\t\tDecember\t");
+            break;
+        default:
+            printf(" opps! ");
+            break;    
+    }
+
+}
+void printName()
+{
+    int i,j;
+
+            for(j=1;j<=3;j++)
+            {
+                monthName(mn);
+                mn++;
+            }
+            printf("\n");
+             for(j=1;j<=3;j++)
+            {
+                 printf("---------------------------------\t");
+            }
+            printf("\n");
+            for(j=1;j<=3;j++)
+            {
+                daysName();
+            }
+            printf("\n");
+}
