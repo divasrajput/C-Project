@@ -171,43 +171,44 @@ void daysName()
 
 void monthName(int m)
 {
+    
     switch(m)
     {
         case 1:
-            printf("\t\tJanuary\t\t");
+            printf("%-33s\t","January");
             break;
         case 2:
-            printf("\t\t\tFebruary\t\t");
+            printf("%-33s\t","February");
             break;
         case 3:
-            printf("\t\tMarch");
+            printf("%-33s\t","March");
             break;
         case 4:
-            printf("\t\tApril\t\t");
+            printf("%-33s\t","April");
             break;
         case 5:
-            printf("\t\t\tMay\t\t");
+            printf("%-33s\t","May");
             break;
         case 6:
-            printf("\t\t\tJune\t");
+            printf("%-33s\t","June");
             break;
         case 7:
-            printf("\t\tJuly\t\t");
+            printf("%-33s\t","July");
             break;
         case 8:
-            printf("\t\t\tAugust\t\t");
+            printf("%-33s\t","August");
             break;
         case 9:
-            printf("\t\t\tSeptember\t\t");
+            printf("%-33s\t","September");
             break;
         case 10:
-            printf("\t\tOctober\t\t");
+            printf("%-33s\t","October");
             break;
         case 11:
-            printf("\t\t\tNovember\t\t");
+            printf("%-33s\t","November");
             break;
         case 12:
-            printf("\t\tDecember\t");
+            printf("%-33s\t","December");
             break;
         default:
             printf(" opps! ");
@@ -219,6 +220,11 @@ void printName()
 {
     int i,j;
 
+            for(j=1;j<=3;j++)
+            {
+                 printf("---------------------------------\t");
+            }
+             printf("\n");
             for(j=1;j<=3;j++)
             {
                 monthName(mn);
